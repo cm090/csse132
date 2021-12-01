@@ -26,3 +26,5 @@ git pull
 ```
 
 You should not be prompted to enter your password.
+
+[Back to homepage](/)

@@ -1,6 +1,7 @@
 # Rose Registration Automation Tool
 This script will:
-- automatically fill in a PIN at random intervals
+- automatically fill in a PIN
+- randomly refresh the waiting screen
 - input CRNs as soon as the registration page opens
 
 ## Requirements

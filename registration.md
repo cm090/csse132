@@ -43,7 +43,7 @@ if (url === '/BanSS/bwskfreg.P_AltPin') {
     timeTrack();
 } else if (url === '/path/to/reg') {
     if (!cookieCheck('completedRegistration')) {
-        console.log('found registration page, trying to autofill courses...')
+        console.log('found registration page, trying to autofill courses...');
         for (var i = 0; i < document.querySelectorAll('input.form-control').length; i++) {
             document.querySelectorAll('.dedefault > input[name="CRN_IN"]')[i].value = classes[i];
         }

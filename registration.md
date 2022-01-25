@@ -33,19 +33,27 @@ const pin = 123456;
 // -------------------------------------------------------------------------------------
 
 var url = window.location.pathname;
-if(url === '/BanSS/bwskfreg.P_AltPin') {
-  console.log('trying pin...');
-  document.querySelector("#apin_id").value = pin;
-  document.querySelector("body > div.pagebodydiv > form > input[type=submit]").click();
-  timeTrack();
-} else if(url === '/BanSS/bwskfreg.P_CheckAltPin') {
-  console.log('found waiting page, refreshing soon...');
-  timeTrack();
-} else if(url === '/path/to/reg') {
-  for(var i = 0; i < document.querySelectorAll('input.form-control').length; i++) {
-    document.querySelectorAll('.dedefault > input[name="CRN_IN"]')[i].value = classes[i];
-  }
-  document.querySelectorAll('input[value="Submit Changes"]').click();
+if (url === '/BanSS/bwskfreg.P_AltPin') {
+    console.log('trying pin...');
+    document.querySelector("#apin_id").value = pin;
+    document.querySelector("body > div.pagebodydiv > form > input[type=submit]").click();
+    timeTrack();
+} else if (url === '/BanSS/bwskfreg.P_CheckAltPin') {
+    console.log('found waiting page, refreshing soon...');
+    timeTrack();
+} else if (url === '/path/to/reg') {
+    if (!cookieCheck('completedRegistration')) {
+        console.log('found registration page, trying to autofill courses...')
+        for (var i = 0; i < document.querySelectorAll('input.form-control').length; i++) {
+            document.querySelectorAll('.dedefault > input[name="CRN_IN"]')[i].value = classes[i];
+        }
+        console.log('courses filled, adding cookie and submitting...');
+        document.cookie = 'completedRegistration=true ';
+        document.querySelectorAll('input[value="Submit Changes"]').click();
+    } else {
+        alert('Course autofill complete!');
+        console.log('Thanks for using this tool! Learn more at https://csse132.rhit.cf/registration');
+    }
 }
 
 function timeTrack() {
@@ -53,7 +61,8 @@ function timeTrack() {
     var timeUntil = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 7, 30, 0, 0) - now;
     console.log(timeUntil);
     if (timeUntil < 0) {
-        setTimeout(function(){
+        console.log('registration time, loading the next page...');
+        setTimeout(function () {
             location.reload();
         }, 200);
     }
@@ -62,9 +71,24 @@ function timeTrack() {
             location.reload();
         }, Math.floor(Math.random() * 10000));
     }
-    setTimeout(function(){
+    setTimeout(function () {
         location.reload();
     }, timeUntil);
+}
+
+function cookieCheck(search) {
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].split('=');
+        if (c[0].substring(0, 1) == ' ') {
+            c[0] = c[0].substring(1);
+        }
+        if (c[0] === search) {
+            return c[1];
+        }
+    }
+    return false;
 }
 ```
 

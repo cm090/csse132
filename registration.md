@@ -25,7 +25,7 @@ Paste the following code into the textbox and make changes based on the comments
 // In the array below, enter up to 10 CRNs. If you have less than 10, use two single quotes
 const classes = [0, 0, 0, 0, 0, 0, 0, 0, '', ''];
 // Enter your registration PIN below. This information doesn't leave your device
-const pin = 616260;
+const pin = 123456;
 
 // -------------------------------------------------------------------------------------
 // IMPORTANT: Do not change any of the code below and make sure you've copied everything

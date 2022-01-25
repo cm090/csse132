@@ -37,9 +37,10 @@ if(url === '/BanSS/bwskfreg.P_AltPin') {
   console.log('trying pin...');
   document.querySelector("#apin_id").value = pin;
   document.querySelector("body > div.pagebodydiv > form > input[type=submit]").click();
+  timeTrack();
 } else if(url === '/BanSS/bwskfreg.P_CheckAltPin') {
   console.log('found waiting page, refreshing soon...');
-  refreshPage();
+  timeTrack();
 } else if(url === '/path/to/reg') {
   for(var i = 0; i < document.querySelectorAll('input.form-control').length; i++) {
     document.querySelectorAll('.dedefault > input[name="CRN_IN"]')[i].value = classes[i];
@@ -47,10 +48,23 @@ if(url === '/BanSS/bwskfreg.P_AltPin') {
   document.querySelectorAll('input[value="Submit Changes"]').click();
 }
 
-function refreshPage() {
+function timeTrack() {
+    var now = new Date();
+    var timeUntil = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 7, 30, 0, 0) - now;
+    console.log(timeUntil);
+    if (timeUntil < 0) {
+        setTimeout(function(){
+            location.reload();
+        }, 200);
+    }
+    if (timeUntil > 10000) {
         setTimeout(function () {
             location.reload();
         }, Math.floor(Math.random() * 10000));
+    }
+    setTimeout(function(){
+        location.reload();
+    }, timeUntil);
 }
 ```
 

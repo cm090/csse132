@@ -21,8 +21,20 @@ Above the textbox on the right, use the dropdown menu to select JavaScript
 
 Paste the following code into the textbox and make changes based on the comments
 ```
-const classes = [0, 0, 0, 0, 0, 0, 0, 0];
+// -------------------------------------------------------------------------------------
+// NOTE: This script is not yet complete. This message will disappear when ready for use
+// -------------------------------------------------------------------------------------
+
+// In the array below, enter up to 10 CRNs. If you have less than 10, use two single quotes
+const classes = [0, 0, 0, 0, 0, 0, 0, 0, '', ''];
+// Enter your registration PIN below. This information doesn't leave your device
 const pin = 123456;
+
+// -------------------------------------------------------------------------------------
+// IMPORTANT: Do not change any of the code below and make sure you've copied everything
+//            We're not responsible for registration failures based on this script
+// -------------------------------------------------------------------------------------
+
 for(var i = 0; i < document.querySelectorAll('input.form-control').length; i++) {
   document.querySelectorAll('.dedefault > input[name="CRN_IN"]')[i].value = classes[i];
 }

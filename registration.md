@@ -33,7 +33,7 @@ const pin = 111111;
 // -------------------------------------------------------------------------------------
 
 var url = window.location.pathname;
-if (url === '/BanSS/bwckcoms.P_AltPin' || url === '/BanSS/bwskfreg.P_CheckAltPin' || url === '/BanSS/bwckcoms.P_Regs') {
+if (url.includes('P_AltPin') || url.includes('P_CheckAltPin') || url.includes('P_Regs')) {
     if (document.querySelector('#apin_id') !== null) {
         console.log('trying pin...');
         document.querySelector("#apin_id").value = pin;

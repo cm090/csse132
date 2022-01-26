@@ -33,27 +33,29 @@ const pin = 111111;
 // -------------------------------------------------------------------------------------
 
 var url = window.location.pathname;
-if (document.querySelector('#apin_id') !== null) {
-    console.log('trying pin...');
-    document.querySelector("#apin_id").value = pin;
-    document.querySelector("body > div.pagebodydiv > form > input[type=submit]").click();
-    timeTrack();
-} else if (url === '/BanSS/bwskfreg.P_CheckAltPin' || url === '/BanSS/bwckcoms.P_Regs') {
-    if (!document.querySelector('.dataentrytable')) {
-        console.log('found waiting page, refreshing soon...');
+if (url === '/BanSS/bwckcoms.P_AltPin' || url === '/BanSS/bwskfreg.P_CheckAltPin' || url === '/BanSS/bwckcoms.P_Regs') {
+    if (document.querySelector('#apin_id') !== null) {
+        console.log('trying pin...');
+        document.querySelector("#apin_id").value = pin;
+        document.querySelector("body > div.pagebodydiv > form > input[type=submit]").click();
         timeTrack();
     } else {
-        if (!cookieCheck('completedRegistration')) {
-            console.log('found registration page, trying to autofill courses...')
-            for (var i = 0; i < 10; i++) {
-                document.querySelectorAll('.dedefault > input[name="CRN_IN"]')[i].value = classes[i];
-            }
-            console.log('courses filled, adding cookie and submitting...');
-            document.cookie = 'completedRegistration=true ';
-            document.querySelector('input[value="Submit Changes"]').click();
+        if (!document.querySelector('.dataentrytable')) {
+            console.log('found waiting page, refreshing soon...');
+            timeTrack();
         } else {
-            alert('Course autofill complete!');
-            console.log('Thanks for using this tool! Learn more at https://csse132.rhit.cf/registration');
+            if (!cookieCheck('completedRegistration')) {
+                console.log('found registration page, trying to autofill courses...')
+                for (var i = 0; i < 10; i++) {
+                    document.querySelectorAll('.dedefault > input[name="CRN_IN"]')[i].value = classes[i];
+                }
+                console.log('courses filled, adding cookie and submitting...');
+                document.cookie = 'completedRegistration=true ';
+                document.querySelector('input[value="Submit Changes"]').click();
+            } else {
+                alert('Course autofill complete!');
+                console.log('Thanks for using this tool! Learn more at https://csse132.rhit.cf/registration');
+            }
         }
     }
 }

@@ -38,7 +38,6 @@ if (url.includes('P_AltPin') || url.includes('P_CheckAltPin') || url.includes('P
         console.log('trying pin...');
         document.querySelector("#apin_id").value = pin;
         document.querySelector("body > div.pagebodydiv > form > input[type=submit]").click();
-        timeTrack();
     } else {
         if (!document.querySelector('.dataentrytable')) {
             console.log('found waiting page, refreshing soon...');
@@ -68,7 +67,7 @@ function timeTrack() {
         console.log('registration time, loading the next page...');
         setTimeout(function () {
             location.reload();
-        }, 200);
+        }, 1000);
     }
     if (timeUntil > 10000) {
         setTimeout(function () {

@@ -45,7 +45,7 @@ if (url.includes('P_AltPin') || url.includes('P_CheckAltPin') || url.includes('P
             timeTrack();
         } else {
             if (!cookieCheck('completedRegistration')) {
-                console.log('found registration page, trying to autofill courses...')
+                console.log('found registration page, trying to autofill courses...');
                 for (var i = 0; i < 10; i++) {
                     document.querySelectorAll('.dedefault > input[name="CRN_IN"]')[i].value = classes[i];
                 }

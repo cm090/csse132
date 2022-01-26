@@ -39,20 +39,22 @@ if (url === '/BanSS/bwskfreg.P_AltPin') {
     document.querySelector("body > div.pagebodydiv > form > input[type=submit]").click();
     timeTrack();
 } else if (url === '/BanSS/bwskfreg.P_CheckAltPin') {
-    console.log('found waiting page, refreshing soon...');
-    timeTrack();
-} else if (url === '/path/to/reg') {
-    if (!cookieCheck('completedRegistration')) {
-        console.log('found registration page, trying to autofill courses...');
-        for (var i = 0; i < document.querySelectorAll('input.form-control').length; i++) {
-            document.querySelectorAll('.dedefault > input[name="CRN_IN"]')[i].value = classes[i];
-        }
-        console.log('courses filled, adding cookie and submitting...');
-        document.cookie = 'completedRegistration=true ';
-        document.querySelectorAll('input[value="Submit Changes"]').click();
+    if (!document.querySelector('.dataentrytable')) {
+        console.log('found waiting page, refreshing soon...');
+        timeTrack();
     } else {
-        alert('Course autofill complete!');
-        console.log('Thanks for using this tool! Learn more at https://csse132.rhit.cf/registration');
+        if (!cookieCheck('completedRegistration')) {
+            console.log('found registration page, trying to autofill courses...')
+            for (var i = 0; i < document.querySelectorAll('input.form-control').length; i++) {
+                document.querySelectorAll('.dedefault > input[name="CRN_IN"]')[i].value = classes[i];
+            }
+            console.log('courses filled, adding cookie and submitting...');
+            document.cookie = 'completedRegistration=true ';
+            document.querySelectorAll('input[value="Submit Changes"]').click();
+        } else {
+            alert('Course autofill complete!');
+            console.log('Thanks for using this tool! Learn more at https://csse132.rhit.cf/registration');
+        }
     }
 }
 

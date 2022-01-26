@@ -25,7 +25,7 @@ Paste the following code into the textbox and make changes based on the comments
 // In the array below, enter up to 10 CRNs. If you have less than 10, use two single quotes
 const classes = [0, 0, 0, 0, 0, 0, 0, 0, '', ''];
 // Enter your registration PIN below. This information doesn't leave your device
-const pin = 123456;
+const pin = 111111;
 
 // -------------------------------------------------------------------------------------
 // IMPORTANT: Do not change any of the code below and make sure you've copied everything
@@ -33,24 +33,24 @@ const pin = 123456;
 // -------------------------------------------------------------------------------------
 
 var url = window.location.pathname;
-if (url === '/BanSS/bwskfreg.P_AltPin') {
+if (document.querySelector('#apin_id') !== null) {
     console.log('trying pin...');
     document.querySelector("#apin_id").value = pin;
     document.querySelector("body > div.pagebodydiv > form > input[type=submit]").click();
     timeTrack();
-} else if (url === '/BanSS/bwskfreg.P_CheckAltPin') {
+} else if (url === '/BanSS/bwskfreg.P_CheckAltPin' || url === '/BanSS/bwckcoms.P_Regs') {
     if (!document.querySelector('.dataentrytable')) {
         console.log('found waiting page, refreshing soon...');
         timeTrack();
     } else {
         if (!cookieCheck('completedRegistration')) {
             console.log('found registration page, trying to autofill courses...')
-            for (var i = 0; i < document.querySelectorAll('input.form-control').length; i++) {
+            for (var i = 0; i < 10; i++) {
                 document.querySelectorAll('.dedefault > input[name="CRN_IN"]')[i].value = classes[i];
             }
             console.log('courses filled, adding cookie and submitting...');
             document.cookie = 'completedRegistration=true ';
-            document.querySelectorAll('input[value="Submit Changes"]').click();
+            document.querySelector('input[value="Submit Changes"]').click();
         } else {
             alert('Course autofill complete!');
             console.log('Thanks for using this tool! Learn more at https://csse132.rhit.cf/registration');
